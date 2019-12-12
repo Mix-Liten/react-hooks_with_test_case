@@ -25,6 +25,7 @@ describe('useEffect should work', () => {
   it('initial state', () => {
     const { getByTestId } = render(<Foo />);
     expect(getByTestId('count').innerHTML).toEqual('0');
+    expect(getByTestId('num').innerHTML).toEqual('0');
     expect(getByTestId('list').innerHTML).toEqual('1'); // [0]
   })
 
@@ -32,12 +33,14 @@ describe('useEffect should work', () => {
     const { getByText, getByTestId } = render(<Foo />);
     fireEvent.click(getByText('add count'));
     expect(getByTestId('count').innerHTML).toEqual('1');
+    expect(getByTestId('num').innerHTML).toEqual('0');
     expect(getByTestId('list').innerHTML).toEqual('2'); // [0, 1]
   })
 
   it('after click add num button, num should be one and list should not be affected', () => {
     const { getByText, getByTestId } = render(<Foo />);
     fireEvent.click(getByText('add num'));
+    expect(getByTestId('count').innerHTML).toEqual('0');
     expect(getByTestId('num').innerHTML).toEqual('1');
     expect(getByTestId('list').innerHTML).toEqual('1'); // [0]
   })
